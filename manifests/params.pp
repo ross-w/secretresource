@@ -4,17 +4,9 @@
 # It sets variables according to platform.
 #
 class secretresource::params {
-  case $::osfamily {
-    'Debian': {
-      $package_name = 'nullfs'
-      $blackhole_dir = '/var/spool/catalogblackhole'
-    }
-    'RedHat', 'Amazon': {
-      $package_name = 'nullfs'
-      $blackhole_dir = '/var/spool/catalogblackhole'
-    }
-    default: {
-      fail("${::operatingsystem} not supported")
-    }
+  if empty($puppet_rubylib) {
+    fail("Could not find Puppet's libraries, unsupported version of Puppet?")
   }
+  
+  $none_catalog_path = "${puppet_rubylib}/puppet/indirector/catalog/none.rb"
 }

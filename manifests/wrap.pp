@@ -1,7 +1,11 @@
-define secretresource::wrap($params) {
-  if member($::mountpoints, $::secretresource::blackhole_dir) {
-    notify{'goodo':}
+define secretresource::wrap($res_name, $params) {
+  if $::puppet_catalog_cache_terminus == 'none' {
+    create_resources($res_name, $params)
   } else {
-    notify{"Blackhole directory ${::secretresource::blackhole_dir} is not mounted, skipping wrapped class ${name}"}
+    notify{"Puppet catalog cache terminus should be 'none', is presently '${::puppet_catalog_cache_terminus}'. Skipping wrapped class ${name}. Run puppet again.":
+      loglevel => 'warning',
+    }
   }
+
+  redact('params')
 }

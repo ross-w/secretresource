@@ -11,13 +11,11 @@
 #   e.g. "Specify one or more upstream ntp servers as an array."
 #
 class secretresource (
-  $package_name = $::secretresource::params::package_name,
-  $blackhole_dir = $::secretresource::params::blackhole_dir,
+  $none_catalog_path = $::secretresource::params::none_catalog_path,
 ) inherits ::secretresource::params {
 
   # validate parameters here
 
   class { '::secretresource::install': } ->
-  class { '::secretresource::mount': } ->
   Class['::secretresource']
 }
