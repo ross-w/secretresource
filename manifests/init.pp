@@ -1,14 +1,14 @@
 # Class: secretresource
 # ===========================
 #
-# Full description of class secretresource here.
+# Installs a 'none' catalog indirector and allows resources to be wrapped to ensure
+# they are only called when this is in use
 #
 # Parameters
 # ----------
 #
-# * `sample parameter`
-#   Explanation of what this parameter affects and what it defaults to.
-#   e.g. "Specify one or more upstream ntp servers as an array."
+# * `none_catalog_path`
+#   Path to the none catalog driver
 #
 class secretresource (
   $none_catalog_path = $::secretresource::params::none_catalog_path,
